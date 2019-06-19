@@ -1,0 +1,101 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>蓝色网站后台登录页面模板 - 源码之家</title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <link href="Index.css" rel="stylesheet" />
+    <script>
+        var host = 'http://localhost:9294/';
+
+        $(function () {
+            // 验证 图片点击的时候, 改变一下
+            //$("#imgCode").click(changeCheckCode);
+            $("#submitBTN").click(function () {
+
+                $.ajax({
+                    type: "Post",
+                    url: host + "/UserLogin/ProcessLogin",
+                    data: { loginName: $("#loginName").val(), Password: $("#Password").val() },
+                    dataType: "json",
+                    success: function (data) {
+                        debugger;
+                        if (data.code === 0) {
+                            // 登录成功
+                            alert(data.msg);
+                            // window.location.href = "/pages/welcome.html";
+                        } else {
+                            //changeCheckCode();
+                            alert(data.msg);
+                        }
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+            });
+
+            $('#getInfo').click(function () {
+                $.ajax({
+                    type: "Post",
+                    url: host + "/Home/GetCookie",
+                    data: {},
+                    dataType: "json",
+                    success: function (data) {
+                        debugger;
+                        alert(data.code + ' ' + data.msg + '    ' + data.data);
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+
+            });
+            $('#logout').click(function () {
+                $.ajax({
+                    type: "Post",
+                    url: host + "/UserLogin/ProcessLogout",
+                    data: {},
+                    dataType: "json",
+                    success: function (data) {
+                        debugger;
+                        alert(data.code + ' ' + data.msg + '    ' + data.data);
+                    },
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                });
+
+            });
+
+
+
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="mainin">
+
+        <div class="mainin1">
+            <ul>
+                <li><span>用户名：</span><input name="loginName" type="text" id="loginName" placeholder="登录名" class="SearchKeyword" /></li>
+                <li><span>密码：</span><input type="password" name="Password" id="Password" placeholder="密码" class="SearchKeyword2" /></li>
+
+
+                <li><input type="submit" id='submitBTN' class="tijiao" name="提交" /></li>
+                <li><button id="getInfo">获取信息</button></li>
+                <li><button id="logout">登出</button></li>
+            </ul>
+        </div>
+        <div class="footpage"><span style="" font-family:arial;""="">Copyright ?</span>2016 <a href="http://www.baidu.com/" target="_blank">源码之家</a> － 网聚卡车人的力量</div>
+    </div>
+
+
+</body>
+</html>

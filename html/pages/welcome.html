@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-3.3.1.js"></script>
+    <script src="../Scripts/jquery.validate.js"></script>
+    <script src="../Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script type="text/javascript">
+
+        debugger;
+        var host = 'http://localhost:9294/';
+        $.ajax({
+            type: "Post",
+            url: host + "/Home/Index",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                //  var jsonData = JSON.parse(data);
+
+                debugger;
+                if (data.code === -2) {
+                    console.log(data.msg);
+                    window.location.href = "/Index.html";
+                } else {
+                    $("#content").val(data.data);
+                }
+            }
+            //},
+            //xhrFields: {
+            //    withCredentials: true
+            //}
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+    <h1>start</h1>
+    <div id="content"></div>
+    <h1>end</h1>
+</body>
+</html>
