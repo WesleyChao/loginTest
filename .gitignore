@@ -1,0 +1,8 @@
+Common/bin
+Common/obj
+packages
+taskTokenWebApi/bin
+taskTokenWebApi/obj
+web/bin
+web/obj
+html/bin
